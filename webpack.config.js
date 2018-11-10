@@ -5,7 +5,7 @@ module.exports = {
   //入口文件，现在 src/js 文件夹下创建一个 index.js 文件
   mode: 'development',
   entry: {
-    index: './js/index'
+    index: './src/js/index'
   },
   // 出口文件,输出在 gulpfile 已经指定了，这里就只需要写 文件名就好
   output: {
