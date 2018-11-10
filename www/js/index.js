@@ -644,12 +644,12 @@ var Shudu = __webpack_require__(/*! ../core/shudu */ "./js/core/shudu.js");
 var Checker = __webpack_require__(/*! ../core/checker */ "./js/core/checker.js");
 
 var Grid = function () {
-  // 这个类 需要传入一个 $('') 选择器
+  // 这个类 需要传入一个 $('') 选择器,$("#container") 为 Jquery 对象
   function Grid(container) {
     _classCallCheck(this, Grid);
 
-    this._$container = container; //  container  为 Dom
-    // ？？？多此一举啊，干嘛要把传捡来的参数再定义一次？？？？为了保存？？
+    this._$container = container; //  container  为 Jquery 对象
+    // 将 container 这个 Jquery 对象 赋值给 Grid 类的 _$container 属性
   }
   /* map() 方法返回一个新数组，数组中的元素为原始数组元素调用函数处理后的值。
     map() 方法按照原始数组元素顺序依次处理元素。注意： map() 不会对空数组进行检测。map() 不会改变原始数组。 */
@@ -694,7 +694,7 @@ var Grid = function () {
       });
 
       // 将每行数据加入 1  个 div 中，得到 9  个 div
-      var $divArray = $cells.map(function ($spanArray, rowIndex) {
+      var $divArray = this.$cells.map(function ($spanArray, rowIndex) {
         // 1 个 map 遍历，每次处理 1 行
         return $("<div>").addClass('row').addClass(rowGroupClasses[rowIndex % 3]) //(每宫底边的外框加粗线)
         .append($spanArray);
@@ -752,33 +752,35 @@ var Grid = function () {
     key: 'submit',
     value: function submit() {
       //获取用户填入的数据
-      var data = this._$container.children() // 获取到每行 也就是 div
-      .map(function (rowIndex, div) {
-        // 遍历 每个 div 
-        return $(div).children() // 获取到每个 span
-        .map(function (colIndex, span) {
-          return parseInt($(span).text()) || 0;
+      // 对 this._$container 这个 jQuery 对象使用 .children()  方法 获取到 DOM 对象数组
+      var dataArr = this._$container.children().map(function (rowIndex, divDom) {
+        // 遍历 每个 div ，这里的 div 变量指的是 DOM 对象数组 元素 
+        return $(divDom).children() // $(div) DOM 对象转为 jQuery 对象使用 .children()，获取 span DOM对象
+        .map(function (colIndex, spanDom) {
+          return parseInt($(spanDom).text()) || 0;
         }); // 遍历 span 获取其内部的文本
-      }).toArray() // 转为为原生数组
-      .map(function ($data) {
+      }).toArray().map(function ($data) {
         return $data.toArray();
       });
-      var checker = new Checker(data);
+      //.toArray() 由jQuery 对象数组  转为为原生数组 JS 语言中的数组，这里是个二维数组，矩阵
+
+      // 检查 用户输入的数据
+      var checker = new Checker(dataArr);
       if (checker.check()) {
         return true;
       }
       // 检查不成功进行标记
       var marks = checker._matrixMarks;
-      this._$container.children().each(function (rowIndex, div) {
-        $(div).children().each(function (colIndex, span) {
-          if ($span.hasClass('fixed')) {
+      this._$container.children().each(function (rowIndex, divDom) {
+        $(divDom).children().each(function (colIndex, spanDom) {
+          if ($(spanDom).hasClass('fixed')) {
             return; // 如果这个 span 带有  .fixed 的 class 类，就是游戏数据，不需要标记
           }
           if (!marks[rowIndex][colIndex]) {
-            $(span).addClass('error'); // 给错误的地方，加一个 error 的 class 类，以突显错误
+            $(spanDom).addClass('error'); // 给错误的地方，加一个 error 的 class 类，以突显错误
             //$(span)  与 $span ???
           } else {
-            $span.removeClass("error");
+            $(spanDom).removeClass("error");
           }
         });
       });
