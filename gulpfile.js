@@ -1,4 +1,14 @@
-const gulp = require('gulp') //引入 gulp
+const gulp = require('gulp'); //引入 gulp
+const connect = require('gulp-connect');
+
+// 定义一个 web-server 任务：/*设置服务器*/
+gulp.task('webserver', function () {
+  connect.server({
+    root: ['dist'], //要运行哪个目录
+    livereload: true, //是否热更新。
+    port: 8888 //端口号
+  }); // gulp 之后生成一个服务器地址 eg：http://localhost:8888
+});
 
 //定义 webpack 任务：转译 JavaScript 
 gulp.task('webpack', () => {
@@ -7,6 +17,7 @@ gulp.task('webpack', () => {
   gulp.src('./src/js/**/*.js') // 源码中的所有 js 文件
     .pipe(webpack(config)) // 转译 过程
     .pipe(gulp.dest('./dist/js')) //转译到 www 文件夹下的 js 文件
+    .pipe(connect.reload());
 })
 
 //定义 less 任务：转译 less => css
@@ -16,6 +27,7 @@ gulp.task('less', () => {
     // './src/less/*.less'   . 表示当前目录的意思，它 等价于 'src/less/*.less' 
     .pipe(less()) // 转译 过程
     .pipe(gulp.dest('./dist/css')) //转译到 www 文件夹下的 css 文件
+    .pipe(connect.reload());
 })
 
 // 定义任务 将 html 文件移动到另外一个位置：html 不需要编译
@@ -23,10 +35,16 @@ gulp.task('html', () => {
   /*要操作哪些文件 确定源文件地址*/
   gulp.src('index.html')
     .pipe(gulp.dest('./dist'))
+    .pipe(connect.reload());
 });
 
+gulp.task('ico',()=>{
+  gulp.src('favicon.ico')
+  .pipe(gulp.dest('./dist'))
+})
+
 // 定义默认任务，直接依赖与上面定义的 'webpack' 与 'less'  任务
-gulp.task('default', ['webpack', 'less', 'html'])
+gulp.task('default', ['webpack', 'less', 'html', 'webserver','ico','watch'])
 
 // 定义 watch 任务，一旦 js /less 有改变，将自动编译，不需要每次都在命令行去 gulp 执行编译。
 // 有了这个 watch 任务之后，在命令行执行 `gulp && gulp watch` 命令，然后再编辑过程中就不需要去动用命令行了，

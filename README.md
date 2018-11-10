@@ -12,4 +12,4 @@ $ gulp & gulp watch # 开发过程中 编译监控重载
 
 ## 运行
 
-浏览器打开 dist 目录下的 index.html 文件。
+在浏览器打开 服务器地址 `http://localhost:8888`
