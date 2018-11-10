@@ -1,0 +1,133 @@
+@shadowBottom: 0 0.2rem 0.3rem rgba(48, 48, 48, 192);
+@shadowTop: 0 -0.1rem 0.2rem rgba(48, 48, 48, 192);
+html {
+  font-size: 14px;
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: "Consolas", "微软雅黑";
+    background: #fff;
+    user-select: none;
+    /* 禁止选择复制内容，如果允许选择，碰到选择了会用户体验不好 */
+    max-width: 450px;
+    > * {
+      max-width: 450px;
+    }
+    .main {
+      padding: 0.5rem;
+      .shudu-title {
+        // rem  是 css3 中新增的尺寸单位：相对的 HTML根 元素的大小，后期值需要更新 html 根元素的尺寸即可。
+        margin-bottom: 1.5rem;
+        padding: 1rem;
+        font-size: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        color: #fff;
+        background: rgb(54, 148, 192);
+        box-shadow: @shadowBottom;
+        .title {
+          flex: 2;
+        }
+        .level {
+          flex: 1;
+        }
+      }
+
+      .time-help {
+        padding: 0.5rem;
+        display: flex;
+        justify-content: flex-end;
+        .help {
+          margin: 0.5rem;
+          border-radius: 1rem;
+        }
+      }
+
+      #container {
+        margin: 1rem 0;
+        padding: 0 5%;
+        .row {
+          display: flex;
+          justify-content: center;
+          > span {
+            display: inline-block;
+            cursor: pointer;
+            text-align: center;
+            width: 10%;
+            //height: 24px;
+            //line-height: 24px;
+            border: 1px solid #cccccc;
+            border-right-width: 0;
+            border-bottom-width: 0;
+            background: white;
+            & :first-child {
+              border-left-width: 2px;
+            }
+            & :last-child {
+              border-right-width: 2px;
+            }
+            // 这里为什么需要 & ？？？
+            &.col_g_right {
+              border-right-width: 2px;
+            }
+            &.fixed {
+              background: #ebe6e6;
+            }
+            &.empty {
+              // 数字为 0 时，为白色就看不到数字了
+              color: #fff;
+            }
+            &.error{
+              background: rgb(224, 162, 162);
+            }
+          }
+          & :first-child {
+            > span {
+              border-top-width: 2px;
+            }
+          }
+          & :last-child {
+            > span {
+              border-bottom-width: 2px;
+            }
+          }
+          // 这里为什么需要 & ？？？
+          &.row_g_bottom {
+            > span {
+              border-bottom-width: 2px;
+            }
+          }
+        }
+      }
+      #number-board,
+      #operation-board {
+        margin: 0.1rem 0;
+        padding: 0.5rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      #number-board {
+        div {
+          padding: 0.5rem 0.8rem;
+          background: rgb(223, 152, 46);
+          //height: 2rem;
+          font-size: 1.3rem;
+          //width: 2rem;
+          border-radius: 1rem;
+        }
+      }
+      #operation-board {
+        div {
+          padding: 0.5rem 1rem;
+          background: rgb(54, 148, 192);
+          //height: 3rem;
+          font-size: 1rem;
+          //width: 3rem;
+          border-radius: 1rem;
+        }
+      }
+    }
+  }
+}

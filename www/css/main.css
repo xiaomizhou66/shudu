@@ -1,0 +1,109 @@
+html {
+  font-size: 14px;
+}
+html body {
+  margin: 0;
+  padding: 0;
+  font-family: "Consolas", "微软雅黑";
+  background: #fff;
+  user-select: none;
+  /* 禁止选择复制内容，如果允许选择，碰到选择了会用户体验不好 */
+  max-width: 450px;
+}
+html body > * {
+  max-width: 450px;
+}
+html body .main {
+  padding: 0.5rem;
+}
+html body .main .shudu-title {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  background: #3694c0;
+  box-shadow: 0 0.2rem 0.3rem #303030;
+}
+html body .main .shudu-title .title {
+  flex: 2;
+}
+html body .main .shudu-title .level {
+  flex: 1;
+}
+html body .main .time-help {
+  padding: 0.5rem;
+  display: flex;
+  justify-content: flex-end;
+}
+html body .main .time-help .help {
+  margin: 0.5rem;
+  border-radius: 1rem;
+}
+html body .main #container {
+  margin: 1rem 0;
+  padding: 0 5%;
+}
+html body .main #container .row {
+  display: flex;
+  justify-content: center;
+}
+html body .main #container .row > span {
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+  width: 10%;
+  border: 1px solid #cccccc;
+  border-right-width: 0;
+  border-bottom-width: 0;
+  background: white;
+}
+html body .main #container .row > span :first-child {
+  border-left-width: 2px;
+}
+html body .main #container .row > span :last-child {
+  border-right-width: 2px;
+}
+html body .main #container .row > span.col_g_right {
+  border-right-width: 2px;
+}
+html body .main #container .row > span.fixed {
+  background: #ebe6e6;
+}
+html body .main #container .row > span.empty {
+  color: #fff;
+}
+html body .main #container .row > span.error {
+  background: #e0a2a2;
+}
+html body .main #container .row :first-child > span {
+  border-top-width: 2px;
+}
+html body .main #container .row :last-child > span {
+  border-bottom-width: 2px;
+}
+html body .main #container .row.row_g_bottom > span {
+  border-bottom-width: 2px;
+}
+html body .main #number-board,
+html body .main #operation-board {
+  margin: 0.1rem 0;
+  padding: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+html body .main #number-board div {
+  padding: 0.5rem 0.8rem;
+  background: #df982e;
+  font-size: 1.3rem;
+  border-radius: 1rem;
+}
+html body .main #operation-board div {
+  padding: 0.5rem 1rem;
+  background: #3694c0;
+  font-size: 1rem;
+  border-radius: 1rem;
+}
