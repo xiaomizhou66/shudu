@@ -1,24 +1,24 @@
 // 选择数字填写处理：九宫格中数字的填写
 
-/* class Numbers {
-  constructor(dom) {
-    this._$dom = dom
-    this._$dom.on('click', 'span', e => {
-      const $cell = this._$targetCell // 点击的的九宫格 格子
-      const $div = (e.target) // 点击的数字
+class Numbers {
+  // 构造函数 传入参数： 从 数字面板获取到的 divDom，与 九宫格 grid
+  // new Numbers($("#number-board"),grid)
+  constructor($obj, grid) {
+    this._$obj = $obj
+    this._grid = grid
+    this._$obj.on('click', 'div', e => {
+      const $div = $(e.target) // 点击的数字
       // 1~9 回填数字
-      this.setTargetValue($cell.text());
-      //$cell.text($div.text()) // 将点击的 div 中的内容添加到 九宫格的格子中
+      const n = $div.text() // 获取 数字面板的数字
+      this.fillNumber(n) // 将点击的 div 中的内容添加到 九宫格的格子中
     })
   }
-  setTargetValue(value) {
-    this._$targetDiv
-      .text(value)
-  }
-  // 
-  clickNumber(dom) {
-    this._$targetDiv = dom
+
+  // 将获取到的数字 填入九宫格
+  fillNumber(n) {
+    // this._grid.$clickCell  传进来的网格中的  $clickCell 属性，也就是选中的 格子
+    this._grid.$clickCell.text(n);
   }
 }
 
-module.exports = Numbers */
+module.exports = Numbers

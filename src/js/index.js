@@ -1,4 +1,5 @@
 const Grid = require('./ui/grid')
+const Numbers=require('./ui/number-board')
 
 $(function () {
   var grid = new Grid($("#container"))
@@ -17,7 +18,7 @@ $(function () {
   $('#rebuild').on('click', (e) => {
     grid.rebuild()
   })
-  /*   $rebuild.on('click', e => {
+  /*   $($rebuild.on('click', e => {
       console.log($('#reset'))
       grid.build()
       grid.layout();
@@ -31,4 +32,8 @@ $(function () {
   $('#submit').on('click', (e) => {
     grid.submit()
   })
+
+  new Numbers($("#number-board"),grid)
+
+
 })

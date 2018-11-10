@@ -8,6 +8,10 @@ class Grid {
   // 这个类 需要传入一个 $('') 选择器,$("#container") 为 Jquery 对象
   constructor(container) {
     this._$container = container //  container  为 Jquery 对象
+    this._$container.on('click', 'span', e => {
+      // 选中九宫格格子
+      this.$clickCell = $(e.target)
+    })
     // 将 container 这个 Jquery 对象 赋值给 Grid 类的 _$container 属性
   }
   /* map() 方法返回一个新数组，数组中的元素为原始数组元素调用函数处理后的值。
@@ -31,20 +35,22 @@ class Grid {
 
     // 将所有的数据都加入到 span  中
     this.$cells = matrix.map(rowValues => rowValues.map((cellValue, colIndex) => {
-        /* if (cellValue !== 0) { */
+      if (cellValue) {
         return $("<span>") // 2 个 map 遍历，可以执行九宫格中所有的数组
           .addClass(colGroupClasses[colIndex % 3])
-          //addClass() - 向被选元素添加一个或多个类 (每宫右边的外框加粗线) 
-          .addClass(cellValue ? 'fixed' : 'empty')
-          // 给九宫格题目 生成的数字灰色的背景,数字为 0 时，颜色为 白色，就不用 if 来判断 0 了
+          .addClass('fixed')
           .text(cellValue); //<span>cellValue</span> 
+        /* if (cellValue !== 0) { */
         //设置 text(str) 或返回 text() 所选元素的文本内容
+      } else {
+        return $("<span>") // 2 个 map 遍历，可以执行九宫格中所有的数组
+          .addClass(colGroupClasses[colIndex % 3])
       }
       /* return $("<span>")
         .addClass(colGroupClasses[colIndex % 3])  */
       // cellValue 值为 0 的时候不放进 九宫格，也就是不显示在 界面中
       /* } */
-    ));
+    }));
 
     // 将每行数据加入 1  个 div 中，得到 9  个 div
     const $divArray = this.$cells.map(($spanArray, rowIndex) => {
@@ -70,6 +76,12 @@ class Grid {
         'font-size': width < 32 ? `${width/2}px` : ''
       })
   }
+
+
+
+
+
+
   //返回
   goBack() {
 
