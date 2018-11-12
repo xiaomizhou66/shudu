@@ -3,33 +3,38 @@ const Toolkit = require('./toolkit')
 
 class Generator {
   constructor() {
-    //
+    this.matrix = null
+    this.orders = null
+  }
+  matrix() {
+    return this.matrix
+  }
+  generate() {
+    while (!this.internalGenerate()) {
+      // 不停的生成直到正确
+    }
   }
   // 将数据 0~9 填入九宫格
-  generate() {
-    this.matrix = Toolkit.matrix.makeMatrix(0) // 现在生成的 九宫格数据全都是 0
-
+  internalGenerate() {
     // 获取一个随机序列的矩阵
-    this.orders = Toolkit.matrix.makeMatrix(0) // 现在生成的 九宫格数据全都是 0
-      .map(row => row.map((v, i) => i)) // 将数组 1-9 传入每行
-      .map(row => Toolkit.matrix.shuffle(row)) // 对每行数据进行打乱
+    // 现在生成的 九宫格数据全都是 0
+    this.matrix = Toolkit.matrix.makeMatrix(0);
 
-    //console.log(this.orders)
-
+    this.orders = Toolkit.matrix.makeMatrix(0)
+      .map(rowArr => rowArr.map((cellValue, i) => i))
+      .map(rowArr => Toolkit.matrix.shuffle(rowArr));
+    // shuffle(arr) 对传入的数组打乱顺序，返回新数组
     for (let n = 1; n <= 9; n++) {
-      this.fillNumber(n)
+      // 将数组 1-9 传入每行
+      if (!this.fillNumber(n)) {
+        return false
+      }
     }
-
-    // 随机让一些数据为 0 ，搬到 shudu.js 去做这个动作了
-    /* for (let i = 0; i < 20; i++) {
-      var y = Math.floor(Math.random() * 9)
-      var x = Math.floor(Math.random() * 9)
-      this.matrix[y][x] = 0
-    } */
+    return true
   }
 
   fillNumber(n) {
-    this.fillRow(n, 0) // 从第 0  行开始填入 n
+    return this.fillRow(n, 0) // 从第 0  行开始填入 n
   }
 
   fillRow(n, rowIndex) {
