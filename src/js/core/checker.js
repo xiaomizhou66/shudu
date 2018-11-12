@@ -127,14 +127,14 @@ class Checker {
   }
 }
 
-const gen = new Generator()
+/* const gen = new Generator()
 console.log(gen._matrixMarks) // undefind
 gen.generate()
 const matrix = gen.matrix;
 
 const checker = new Checker(matrix)
 console.log('checker result: ' + checker.check()) // boolen
-console.log(checker.matrixMarks) //
+console.log(checker.matrixMarks) // */
 
 /* matrix[1][1] = 0;
 matrix[2][3] = matrix[3][5] = 5

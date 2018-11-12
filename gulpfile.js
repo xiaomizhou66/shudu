@@ -36,15 +36,18 @@ gulp.task('html', () => {
   gulp.src('index.html')
     .pipe(gulp.dest('./dist'))
     .pipe(connect.reload());
+  gulp.src('./src/pages/*.html')
+    .pipe(gulp.dest('./dist/pages'))
+    .pipe(connect.reload())
 });
 
-gulp.task('ico',()=>{
+gulp.task('ico', () => {
   gulp.src('favicon.ico')
-  .pipe(gulp.dest('./dist'))
+    .pipe(gulp.dest('./dist'))
 })
 
 // 定义默认任务，直接依赖与上面定义的 'webpack' 与 'less'  任务
-gulp.task('default', ['webpack', 'less', 'html', 'webserver','ico','watch'])
+gulp.task('default', ['webpack', 'less', 'html', 'webserver', 'ico', 'watch'])
 
 // 定义 watch 任务，一旦 js /less 有改变，将自动编译，不需要每次都在命令行去 gulp 执行编译。
 // 有了这个 watch 任务之后，在命令行执行 `gulp && gulp watch` 命令，然后再编辑过程中就不需要去动用命令行了，

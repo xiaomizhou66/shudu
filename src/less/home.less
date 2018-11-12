@@ -13,23 +13,35 @@ html {
     > * {
       max-width: 450px;
     }
-    .main {
+    .home {
+      position: relative;
       padding: 0.5rem;
       .shudu-title {
         // rem  是 css3 中新增的尺寸单位：相对的 HTML根 元素的大小，后期值需要更新 html 根元素的尺寸即可。
         margin-bottom: 1.5rem;
-        padding: 1rem;
+        padding: 1rem 0.5rem;
         font-size: 1.5rem;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-between;// 容器水平居中
+        align-items:center;// 容器垂直居中
+        text-align: center;
         color: #fff;
         background: rgb(54, 148, 192);
         box-shadow: @shadowBottom;
+        .goBack{
+          width: 30px;
+          font-size: 0.8rem;
+          flex: 1;
+          color: rgb(39, 37, 37);
+          border: 1px dashed rgb(38, 12, 59);
+          border-radius: 8px;
+        }
         .title {
-          flex: 2;
+          flex: 4;
         }
         .level {
           flex: 1;
+          padding-right: 10px;
         }
       }
 
@@ -41,11 +53,20 @@ html {
           margin: 0.5rem;
           border-radius: 1rem;
         }
-      }
+      };
+      
 
-      #container {
+      #container {  
         margin: 1rem 0;
         padding: 0 5%;
+        &.disableDiv {
+          //cursor: not-allowed;
+          pointer-events: none; // 禁止 事件操作
+          opacity: 0.4;
+        }
+        /*         &.notAllow {
+          cursor: not-allowed;
+        } */
         .row {
           display: flex;
           justify-content: center;
@@ -70,11 +91,20 @@ html {
             &.col_g_right {
               border-right-width: 2px;
             }
+            // 生成的游戏原数字样式
+            // 这里为什么需要 & ?? , 在这里是 span.fixed 表示的是带有 class=fixed 的元素
+            // 如果直接是 .fixed 在这里是 span .fixed 表示 span 标签下的  class=fixed 的元素
             &.fixed {
               background: #ebe6e6;
+              cursor: not-allowed;
             }
-            &.error{
+            // 填写错误的样式
+            &.error {
               background: rgb(224, 162, 162);
+            }
+            //当前选中格子样式
+            &.clickCell {
+              background: rgb(124, 181, 199);
             }
           }
           & :first-child {
@@ -87,7 +117,6 @@ html {
               border-bottom-width: 2px;
             }
           }
-          // 这里为什么需要 & ？？？
           &.row_g_bottom {
             > span {
               border-bottom-width: 2px;
@@ -112,6 +141,15 @@ html {
           font-size: 1.3rem;
           //width: 2rem;
           border-radius: 1rem;
+          &.clickNumber {
+            background: rgb(218, 69, 69);
+          }
+          &.disableFillNumber {
+            //pointer-events: none;
+            cursor: not-allowed;
+            background: #2b1a1a;
+            opacity: 0.4;
+          }
         }
       }
       #operation-board {
@@ -122,8 +160,22 @@ html {
           font-size: 1rem;
           //width: 3rem;
           border-radius: 1rem;
+          &.clickOperation {
+            background: rgb(218, 69, 69);
+          };
+          &.disableOperation {
+            //pointer-events: none;
+            cursor: not-allowed;
+            background: #2b1a1a;
+            opacity: 0.4;
+          }
         }
+        
       }
     }
   }
 }
+/* .disableDiv {
+  pointer-events: none; // 禁止 事件操作
+  opacity: 0.4;
+} */

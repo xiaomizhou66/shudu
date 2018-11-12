@@ -1,0 +1,45 @@
+@shadowBottom: 0 0.2rem 0.3rem rgba(48, 48, 48, 192);
+@shadowTop: 0 -0.1rem 0.2rem rgba(48, 48, 48, 192);
+@title-height: 50px;
+html {
+  font-size: 14px;
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: "Consolas", "微软雅黑";
+    text-align:center;
+    background: #fff;
+    user-select: none;
+    /* 禁止选择复制内容，如果允许选择，碰到选择了会用户体验不好 */
+    max-width: 450px;
+    > * {
+      max-width: 450px;
+    }
+    .title {
+      width: 100%;
+      height: @title-height;
+      line-height: @title-height;
+      font-size: 2rem;
+      color: rgb(148, 21, 21);
+    }
+    .main {
+      position: relative;
+      padding: 0.5rem 0;
+      display: flex; // 会脱离文档流的 ？？？所以塌陷怎么解决的？它的子元素的 cursor？ point：not-allowed？？
+      justify-content: center;
+      .level {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        div {
+          width: 20%;
+          margin: 5px 5px;
+          color: rgb(46, 43, 44);
+          font-size: 1rem;
+          border-radius: 5px;
+          background: rgb(113, 197, 57);
+        }
+      }
+    }
+  }
+}
